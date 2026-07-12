@@ -10,6 +10,8 @@ CORS(app)
 @app.route('/download', methods=['POST'])
 def download():
     url = request.form.get('url')
+    resolution = request.form.get('resolution', 'max')
+
     if not url:
         return "Missing URL parameter", 400
         
@@ -17,8 +19,15 @@ def download():
     file_id = str(uuid.uuid4())
     output_tmpl = f'temp/{file_id}.%(ext)s'
     
+    if resolution == '720p':
+        format_str = 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][ext=mp4]/best'
+    elif resolution == '1080p':
+        format_str = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best'
+    else:
+        format_str = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+        
     ydl_opts = {
-        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        'format': format_str,
         'outtmpl': output_tmpl,
         'merge_output_format': 'mp4',
         'quiet': True,

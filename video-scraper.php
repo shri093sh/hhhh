@@ -21,6 +21,12 @@ function render_python_downloader() {
             <input type="url" name="url" placeholder="Paste TikTok, Instagram, YouTube, X link..." required 
                    style="width: 100%; padding: 12px; border: 2px solid #e1e1e1; border-radius: 6px; font-size: 16px; box-sizing: border-box;">
             
+            <select name="resolution" style="width: 100%; padding: 12px; border: 2px solid #e1e1e1; border-radius: 6px; font-size: 16px; background: white;">
+                <option value="max">Best available</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+            </select>
+            
             <button type="submit" 
                     style="background: #107c41; color: white; border: none; padding: 14px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s;">
                 🚀 Download File
