@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function render_python_downloader() {
     // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL RENDER URL
-    $backend_url = 'https://YOUR-APP-NAME.onrender.com/download';
+    $backend_url = 'https://hhhh-bd9l.onrender.com/download';
 
     $html = '
     <div style="max-width: 500px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: sans-serif;">
