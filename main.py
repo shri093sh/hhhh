@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 import yt_dlp
 import os
@@ -12,6 +12,39 @@ CORS(app)
 def sanitize_filename(name):
     name = re.sub(r'[^A-Za-z0-9._-]+', '_', name)
     return name.strip('_')[:100]
+
+@app.route('/inspect', methods=['POST'])
+def inspect_url():
+    url = request.form.get('url')
+    if not url:
+        return jsonify({'error': 'Missing URL parameter'}), 400
+
+    try:
+        with yt_dlp.YoutubeDL({'quiet': True, 'no_warnings': True}) as ydl:
+            info = ydl.extract_info(url, download=False)
+
+        entries = []
+        if info.get('entries'):
+            for index, entry in enumerate(info['entries'], start=1):
+                entry_url = entry.get('webpage_url') or entry.get('url') or entry.get('id')
+                title = entry.get('title') or f'Video {index}'
+                entries.append({
+                    'index': index,
+                    'title': title,
+                    'url': entry_url,
+                })
+        else:
+            entry_url = info.get('webpage_url') or info.get('url') or url
+            title = info.get('title') or 'Video'
+            entries.append({
+                'index': 1,
+                'title': title,
+                'url': entry_url,
+            })
+
+        return jsonify({'entries': entries})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/download', methods=['POST'])
 def download():

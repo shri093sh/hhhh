@@ -18,8 +18,8 @@ function render_python_downloader() {
         
         <form action="' . esc_url($backend_url) . '" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
             
-            <label for="uvd_urls_input" style="font-weight: 600; color: #333;">Paste URLs (one per line):</label>
-            <textarea id="uvd_urls_input" name="url" placeholder="Paste TikTok, Instagram, YouTube links..." required rows="4"
+            <label for="uvd_urls_input" style="font-weight: 600; color: #333;">Paste a post URL, or multiple URLs (one per line):</label>
+            <textarea id="uvd_urls_input" name="url" placeholder="Paste Instagram carousel or video links here..." required rows="4"
                       style="width: 100%; padding: 12px; border: 2px solid #e1e1e1; border-radius: 6px; font-size: 16px; box-sizing: border-box; resize: vertical;"></textarea>
 
             <button type="button" id="uvd_parse_btn"
@@ -28,7 +28,7 @@ function render_python_downloader() {
             </button>
 
             <div id="uvd_url_list" style="display: none; flex-direction: column; gap: 10px; padding: 15px; border: 1px solid #e1e1e1; border-radius: 8px; background: #fafafa;"></div>
-            <div id="uvd_url_hint" style="color: #666; font-size: 14px;">After parsing, uncheck any videos you do not want to download.</div>
+            <div id="uvd_url_hint" style="color: #666; font-size: 14px;">After parsing, uncheck any carousel items or videos you do not want to download.</div>
             <div id="uvd_hidden_inputs"></div>
 
             <select name="resolution" style="width: 100%; padding: 12px; border: 2px solid #e1e1e1; border-radius: 6px; font-size: 16px; box-sizing: border-box; background: white; cursor: pointer;">
